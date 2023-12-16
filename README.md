@@ -7,6 +7,7 @@ GNU Compilier Collection\
       - https://steveicarus.github.io/iverilog/           \
     Gtkwave Simulator\
       - https://gtkwave.sourceforge.net/               \
+\
 Ubuntu Distros Installation:\
     sudo apt update\
     sudo apt upgrade\
