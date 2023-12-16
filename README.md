@@ -1,4 +1,2 @@
-NOT WORKING!
-|---> make.sh Working on it
+Working on README
 
-Will fill this IGNORE until then
