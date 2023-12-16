@@ -2,11 +2,11 @@ Undergraduate Final Project (First Time Making One):\
 \
 Dependencies:\
 GNU Compilier Collection\
-      - https://gcc.gnu.org/\
+      - https://gcc.gnu.org/       \
     Icarus verilog Compilier\
-      - https://steveicarus.github.io/iverilog/\
+      - https://steveicarus.github.io/iverilog/           \
     Gtkwave Simulator\
-      - https://gtkwave.sourceforge.net/\
+      - https://gtkwave.sourceforge.net/               \
 Ubuntu Distros Installation:\
     sudo apt update\
     sudo apt upgrade\
