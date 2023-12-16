@@ -1,5 +1,5 @@
 module RAM_tb();
-	`include "../parameters.v"
+	`include "parameters.v"
         /*
                 Control Signals:
                         Clk            - Clock signal
@@ -48,11 +48,11 @@ module RAM_tb();
 
 	always #(`DUTY) Clk = ~Clk;
 	initial begin
-		$dumpfile("../Junk/RAM.vcd");
+		$dumpfile("Junk/RAM.vcd");
 		$dumpvars(0, RAM_tb);
-		in_file1 = $fopen("binary.mac","r");
-		in_file2 = $fopen("data.mac","r");
-		out_file = $fopen("../Results/RAM.r", "w");
+		in_file1 = $fopen("Testbenches/binary.mac","r");
+		in_file2 = $fopen("Testbenches/data.mac","r");
+		out_file = $fopen("Results/RAM.r", "w");
 		if(`RAM_GEN_RAND_INPUT) begin
 			run = `NUM_RAM_TEST;		
 		end

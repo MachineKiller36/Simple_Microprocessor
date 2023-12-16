@@ -2,8 +2,10 @@
 if [[ $1 = "clean" ]]
 then
 	echo Cleaning...
-	find -name *.out -delete		# Removes all executibles - General
-	find -name  *.vcd -delete	        # Removes all dump file - Verilog
+	#find -name *.out -delete		# Removes all executibles - General
+	#find -name  *.vcd -delete	        # Removes all dump file - Verilog
+	rm -r Junk
+	mkdir Junk
 	echo Complete
 ###################################	      ASSEMBLE		#################################################
 elif [[ $1 = "assemble" ]]
@@ -49,31 +51,31 @@ then
 		echo
 		echo Compiling...
 		echo
-		if [[ $Module = "CONTROLLER.v"  ]]
+		if [[ $Module = "Modules/CONTROLLER.v"  ]]
 		then
 			iverilog Modules/CONTROLLER.v -o Junk/CONTROLLER.out
 		
-		elif [[ $Module = "DATAPATH.v"  ]]
+		elif [[ $Module = "Modules/DATAPATH.v"  ]]
 		then
 			iverilog Modules/DATAPATH.v Modules/ALU.v Modules/IR.v Modules/MUX.v Modules/PC.v Modules/REG.v -o Junk/DATAPATH.out
 		
-		elif [[ $Module = "IR.v"  ]]
+		elif [[ $Module = "Modules/IR.v"  ]]
 		then
 			iverilog Modules/IR.v -o Junk/IR.out
 		
-		elif [[ $Module = "PC.v"  ]]
+		elif [[ $Module = "Modules/PC.v"  ]]
 		then
 			iverilog Modules/PC.v -o Junk/PC.out
 		
-		elif [[ $Module = "PROCESSOR.v"  ]]
+		elif [[ $Module = "Modules/PROCESSOR.v"  ]]
 		then
 			iverilog Modules/PROCESSOR.v Modules/ALU.v Modules/CONTROLLER.v Modules/DATAPATH.v Modules/IR.v Modules/MUX.v Modules/PC.v Modules/RAM.v Modules/REG.v -o Junk/PROCESSOR.out
 		
-		elif [[ $Module = "RAM.v"  ]]
+		elif [[ $Module = "Modules/RAM.v"  ]]
 		then
 			iverilog Modules/RAM.v -o Junk/RAM.out
 		
-		elif [[ $Module = "REG.v"  ]]
+		elif [[ $Module = "Modules/REG.v"  ]]
 		then
 			iverilog Modules/REG.v -o Junk/REG.out
 		fi
@@ -93,8 +95,10 @@ then
 	echo 
 	echo "Source_File                                Dependencies:"
 	echo  "-----------                                -------------"
+	echo "ALU_tb.v                                      ALU.v"
 	echo "CONTROLLER_tb.v                               CONTROLLER.v"
 	echo "IR_tb.v                                       IR.v"
+	echo "MUX_tb.v                                      MUX.v"
 	echo "PC_tb.v                                       PC.v"
 	echo "PROCESSOR_tb.v                                ALU.v   CONTROLLER.v   DATAPATH.v   IR.v   PC.v   PROCESSOR.v   RAM.v   REG.v"
 	echo "RAM_tb.v                                      RAM.v"
@@ -103,61 +107,86 @@ then
 	echo
 	echo Enter the .mac file that has the machine instructions for the test input
 	read -p "FileName >> " Mac_File
-	cp Mac_File Testbenches/binary.mac
+	cp $Mac_File Testbenches/binary.mac
 	echo
 	# RAM_tb.v has a secondary input file that is to test the load data function of it
-	if [[ -f "Testbenches/$Modules" ]]
+	if [[ $Module = "RAM_tb.v" ]]
 	then
-		if [[ $Module = "RAM_tb.v" ]]
+		echo Enter the file that has the data for the test input
+		read -p "Filename >> " Data_File
+		echo
+		cp $Data_File Testbenches/data.mac
+	fi
+	if [ -f $Mac_File ]
+	then
+		echo
+		echo Simulating...
+		echo
+		if [[ $Module = "ALU_tb.v" ]]
 		then
-			echo Enter the file that has the data for the test input
-			read -p "Filename >> " Data_File
+			iverilog Testbenches/ALU_tb.v Modules/ALU.v -o Junk/ALU.out
+			vvp Junk/ALU.out
 			echo
-			cp Data_File Testbenches/data.mac
-		fi
-		if [ -f $Mac_File ]
-		then
+			echo Note: Results can be found in Results/ALU.r
 			echo
-			echo Simulating...
-			echo
-			if [[ $Module = "CONTROLLER_tb.v" ]]
-			then
-				iverilog Testbenches/CONTROLLER_tb.v Modules/CONTROLLER.v -o Junk/CONTROLLER.out
-				vvp Junk/CONTROLLER.out
-				gtkwave Junk/CONTROLLER.vcd
-		
-			elif [[ $Module = "IR_tb.v" ]]
-			then
-				iverilog Testbenches/IR_tb.v Modules/IR.v parameters.v -o Junk/IR.out
-				vvp Junk/IR.out
-				gtkwave Junk/IR.vcd
-			
-			elif [[ $Module = "PC_tb.v" ]]
-			then
-				iverilog Testbenches/PC_tb.v Modules/PC.v -o Junk/PC.out
-				vvp Junk/PC.out
-				gtkwave Junk/PC.vcd
-				
-			elif [[ $Module = "PROCESSOR_tb.v" ]]
-			then
-				iverilog Testbenches/PROCESSOR_tb.v Modules/ALU.v Modules/CONTROLLER.v Modules/DATAPATH.v Modules/IR.v Modules/MUX.v Modules/PC.v Modules/PROCESSOR.v Modules/RAM.v Modules/REG.v parameters.v -o Junk/PROCESSOR.out
-				vvp Junk/PROCESSOR.out
-				gtkwave Junk/PROCESSOR.vcd
+			gtkwave Junk/ALU.vcd
 
-			elif [[ $Module = "RAM_tb.v" ]]
-			then
-				iverilog Testbenches/RAM_tb.v Modules/RAM.v -o Junk/RAM.out
-				vvp Junk/RAM.out
-				gtkwave Junk/RAM.vcd
-		
-			else
-				echo Failed: $Module does not exist
-			fi
+		elif [[ $Module = "CONTROLLER_tb.v" ]]
+		then
+			iverilog Testbenches/CONTROLLER_tb.v Modules/CONTROLLER.v -o Junk/CONTROLLER.out
+			vvp Junk/CONTROLLER.out
+			echo
+			echo Note: Results can be found in Results/CONTROLLER.r
+			echo
+			gtkwave Junk/CONTROLLER.vcd
+	
+		elif [[ $Module = "IR_tb.v" ]]
+		then
+			iverilog Testbenches/IR_tb.v Modules/IR.v parameters.v -o Junk/IR.out
+			vvp Junk/IR.out
+			echo
+			echo Note: Results can be found in Results/IR.r
+			echo
+			gtkwave Junk/IR.vcd
+		elif [[ $Module = "MUX_tb.v" ]]
+		then
+			iverilog Testbenches/MUX_tb.v Modules/MUX.v -o Junk/MUX.out
+			vvp Junk/MUX.out
+			echo
+			echo Note: Results can be found in Results/MUX.r
+			echo
+			gtkwave Junk/MUX.vcd
+
+		elif [[ $Module = "PC_tb.v" ]]
+		then
+			iverilog Testbenches/PC_tb.v Modules/PC.v -o Junk/PC.out
+			vvp Junk/PC.out
+			echo
+			echo Note: Results can be found in Results/PC.r
+			echo
+			gtkwave Junk/PC.vcd
+			
+		elif [[ $Module = "PROCESSOR_tb.v" ]]
+		then
+			iverilog Testbenches/PROCESSOR_tb.v Modules/ALU.v Modules/CONTROLLER.v Modules/DATAPATH.v Modules/IR.v Modules/MUX.v Modules/PC.v Modules/PROCESSOR.v Modules/RAM.v Modules/REG.v parameters.v -o Junk/PROCESSOR.out
+			vvp Junk/PROCESSOR.out
+			echo
+			gtkwave Junk/PROCESSOR.vcd
+
+		elif [[ $Module = "RAM_tb.v" ]]
+		then
+			iverilog Testbenches/RAM_tb.v Modules/RAM.v -o Junk/RAM.out
+			vvp Junk/RAM.out
+			echo
+			echo Note: Results can be found in Results/RAM.r
+			echo
+			gtkwave Junk/RAM.vcd
+	
 		else
-			echo Failed: $Mac_File does not exist
+			echo Failed: $Module does not exist
 		fi
 	else
-		echo Failed: $Module does not exist
+		echo Failed: $Mac_File does not exist
 	fi
 ################################	        ERROR			#################################################
 else
@@ -170,6 +199,9 @@ else
 	echo "	 - The .asm file is the assembly code you want to convert."
 	echo "	 - The assembler will return a file of the same name as the .asm, but with the .mac file extension."
 	echo 
+	echo "Clean:"
+	echo "         - Clears the junk folder."
+	echo
 	echo "Verilog Compilier (iverilog):"
 	echo "         - Command: ./make.sh compile"
 	echo "         - It will prompt you for the file name of the module you want to compile."

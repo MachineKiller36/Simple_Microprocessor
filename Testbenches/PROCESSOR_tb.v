@@ -1,5 +1,5 @@
 module PROCESSOR_tb();
-	`include "../parameters.v"
+	`include "parameters.v"
 	reg Clk=0, Reset=1, Ram_Inst_Write=0;
 	reg [`INST_WIDTH-1:0] Ram_Inst_In;
 	reg [`ADDR_WIDTH-1:0] Inst_Addr;
@@ -19,9 +19,9 @@ module PROCESSOR_tb();
 	);
 	always #(`DUTY) Clk = ~Clk;
 	initial begin
-		$dumpfile("../Junk/PROCESSOR.vcd");
+		$dumpfile("Junk/PROCESSOR.vcd");
 		$dumpvars(0, PROCESSOR_tb);
-		file = $fopen("binary.mac", "r");	
+		file = $fopen("Testbenches/binary.mac", "r");	
 		for(address = 0; address < `NUM_MEM_ADDR; address = address + 1) begin
 			#(`PERIOD) Ram_Inst_Write = 1;
 			Inst_Addr = address;

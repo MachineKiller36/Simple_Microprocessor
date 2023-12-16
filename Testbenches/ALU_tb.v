@@ -1,5 +1,5 @@
 module ALU_tb();
-	`include "../parameters.v"
+	`include "parameters.v"
 
 	/*
 		Control Signals:
@@ -36,9 +36,9 @@ module ALU_tb();
 	integer test;
 	integer operation;
 	initial begin
-		$dumpfile("../Junk/ALU.vcd");
+		$dumpfile("Junk/ALU.vcd");
 		$dumpvars(0, ALU_tb);
-		file = $fopen("../Results/ALU.r", "w");
+		file = $fopen("Results/ALU.r", "w");
 		for(test = 0; test < `NUM_ALU_TEST; test = test + 1) begin
 			operation = $urandom % 4;	// Used to determine what operation is perform
 			if(operation == 0) 

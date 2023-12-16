@@ -1,5 +1,5 @@
 module CONTROLLER_tb();
-	`include "../parameters.v"
+	`include "parameters.v"
 	/*
 		Control Signals:
 			Clk - Clock Signals.
@@ -57,7 +57,7 @@ module CONTROLLER_tb();
 	integer run;		// Holds how many times to run the test.
 	always #(`DUTY) Clk = ~Clk;
 	initial begin
-		$dumpfile("../Junk/CONTROLLER.vcd");
+		$dumpfile("Junk/CONTROLLER.vcd");
 		$dumpvars(0, CONTROLLER_tb);
 		state = 0;
 		// Checks if we are randomly generating values or using
@@ -72,8 +72,8 @@ module CONTROLLER_tb();
 		#(`PERIOD);
 		Reset = 0;
 
-		in_file = $fopen("binary.asm", "r");
-		out_file = $fopen("../Results/CONTROLLER.r", "w");
+		in_file = $fopen("Testbenches/binary.mac", "r");
+		out_file = $fopen("Results/CONTROLLER.r", "w");
 		$fwrite(out_file, "Randomized Opcode = %b", `CONT_GEN_RAND_OPCODE);
 		$fwrite(out_file, "\n\n");
 		for(address = 0; address < run; address = address + 1) begin

@@ -1,5 +1,5 @@
 module IR_tb();
-	`include "../parameters.v"
+	`include "parameters.v"
 	/*
 		Control Signals:
 			Clk 	- Clock signal.
@@ -36,10 +36,10 @@ module IR_tb();
 	integer address;
 	always #(`DUTY) Clk = ~Clk;
 	initial begin
-		$dumpfile("../Junk/IR.vcd");
+		$dumpfile("Junk/IR.vcd");
 		$dumpvars(0, IR_tb);
-		in_file = $fopen("binary.mac", "r");
-		out_file = $fopen("../Results/IR.r", "w");
+		in_file = $fopen("Testbenches/binary.mac", "r");
+		out_file = $fopen("Results/IR.r", "w");
 		for(address = 0; address < `NUM_IR_TEST; address = address + 1) begin
 			#(`PERIOD) IR_Load = 1;
 			if(`IR_GEN_RAND_INST) begin
