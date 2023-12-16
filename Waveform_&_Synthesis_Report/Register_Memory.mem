@@ -1,0 +1,4 @@
+// memory data file (do not edit the following line - required for mem load use)
+// instance=/PROCESSOR_tb/Simple/datapath/registers/Register
+// format=bin addressradix=h dataradix=b version=1.0 wordsperline=8
+@7 xxxxxx xxxxxx 110010 111011 000101 001111 000101 001010
