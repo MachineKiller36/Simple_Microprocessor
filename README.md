@@ -1,5 +1,3 @@
-Undergraduate Final Project (First Time Making One):\
-\
 Dependencies:\
 GNU Compilier Collection\
       - https://gcc.gnu.org/       \
