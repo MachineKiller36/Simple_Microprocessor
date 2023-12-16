@@ -1,7 +1,7 @@
 Undergraduate Final Project (First Time Making One):\
 \
 Dependencies:\
-&nbsp;GNU Compilier Collection\
+GNU Compilier Collection\
       - https://gcc.gnu.org/\
     Icarus verilog Compilier\
       - https://steveicarus.github.io/iverilog/\
