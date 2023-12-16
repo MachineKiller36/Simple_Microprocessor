@@ -1,0 +1,43 @@
+ 
+****************************************
+Report : hierarchy
+Design : PROCESSOR
+Version: S-2021.06-SP5-1
+Date   : Tue Dec 12 04:24:46 2023
+****************************************
+
+Attributes:
+    r - licensed design
+
+PROCESSOR          r
+    AND2_X1           NangateOpenCellLibrary
+    AND3_X1           NangateOpenCellLibrary
+    AOI21_X1          NangateOpenCellLibrary
+    AOI22_X1          NangateOpenCellLibrary
+    AOI22_X2          NangateOpenCellLibrary
+    AOI221_X1         NangateOpenCellLibrary
+    AOI222_X1         NangateOpenCellLibrary
+    BUF_X1            NangateOpenCellLibrary
+    DFF_X1            NangateOpenCellLibrary
+    DLH_X1            NangateOpenCellLibrary
+    FA_X1             NangateOpenCellLibrary
+    HA_X1             NangateOpenCellLibrary
+    INV_X1            NangateOpenCellLibrary
+    NAND2_X1          NangateOpenCellLibrary
+    NAND3_X1          NangateOpenCellLibrary
+    NAND4_X1          NangateOpenCellLibrary
+    NOR2_X1           NangateOpenCellLibrary
+    NOR2_X2           NangateOpenCellLibrary
+    NOR3_X1           NangateOpenCellLibrary
+    NOR3_X2           NangateOpenCellLibrary
+    OAI21_X1          NangateOpenCellLibrary
+    OAI22_X1          NangateOpenCellLibrary
+    OAI22_X2          NangateOpenCellLibrary
+    OAI211_X1         NangateOpenCellLibrary
+    OAI221_X1         NangateOpenCellLibrary
+    OR2_X1            NangateOpenCellLibrary
+    OR3_X1            NangateOpenCellLibrary
+    OR4_X1            NangateOpenCellLibrary
+    XNOR2_X1          NangateOpenCellLibrary
+    XOR2_X1           NangateOpenCellLibrary
+1

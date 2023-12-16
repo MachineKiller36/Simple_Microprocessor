@@ -1,0 +1,30 @@
+ 
+****************************************
+Report : area
+Design : PROCESSOR
+Version: S-2021.06-SP5-1
+Date   : Tue Dec 12 04:24:46 2023
+****************************************
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /synopsys/Nangate_FreePDK45/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Liberty/CCS/NangateOpenCellLibrary.db)
+
+Number of ports:                           36
+Number of nets:                          8530
+Number of cells:                         6703
+Number of combinational cells:           4853
+Number of sequential cells:              1848
+Number of macros/black boxes:               0
+Number of buf/inv:                        389
+Number of references:                      30
+
+Combinational area:               6143.802166
+Buf/Inv area:                      264.935996
+Noncombinational area:            8351.069698
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                 14494.871864
+Total area:                 undefined
+1
