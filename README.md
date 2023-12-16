@@ -36,3 +36,10 @@ Assembler:\
       2. assembler.logs, this holds the name of the assembly file to be converted, all the errors thrown, error count, warning count, and whether it was successful or not.\
       3. debugger, this is a sid-by-side comparision of your .asm code and the .mac code.\
 \
+Compilier:\
+    - Does nothing but verifies that the syntax of the Verilog modules are correct.\
+\
+Simulater:\
+    - Runs testbenches and produces the waveform and anything written to a file will be stored in the Results folder.\
+    - Check the terminal screen for a "Note:" comment, this gives you the file location of where the testbench printed results are.\
+\
